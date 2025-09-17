@@ -1,10 +1,11 @@
 const express =require ("express");
 const {createTodo}= require("./types");
+const {todo}= require("./db");
 const app= express();
 
 app.use(express.json());
 
-app.post("/todo", function(req, res){
+app.post("/todo", async function(req, res){
     const createPayload= req.body;
     const parsedPayload= createTodo.safePayload(createPayload);
     if(!parsedPayload.success){
@@ -13,6 +14,13 @@ app.post("/todo", function(req, res){
         })
         return;
     }
+    await todo.create({
+        title: createPayload.title,
+        description:createPayload.title
+    })
+    res.json({
+        msg:"Todo Created"
+    })
 })
 
 app.get("/todos", function(req, res){
