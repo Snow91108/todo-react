@@ -5,10 +5,11 @@ mongoose.connect("mongodb+srv://sachinrv19:PvNCWOTzbIDyOi7h@cluster0.1qoem00.mon
 const todoSchema= mongoose.Schema({
     title: String,
     description: String,
-    completed: Boolean
+    completed: {
+        type: Boolean,
+        default: false
+    }
 })
 
-const todo= mongoose.model("todos", todoSchema);
-module.export={
-    todo
-}
+const todo= mongoose.model("todo", todoSchema);
+module.exports = { todo };

@@ -1,13 +1,15 @@
 const express =require ("express");
 const {createTodo}= require("./types");
 const {todo}= require("./db");
+const cors= require("cors")
 const app= express();
 
 app.use(express.json());
+app.use(cors());
 
 app.post("/todo", async function(req, res){
     const createPayload= req.body;
-    const parsedPayload= createTodo.safePayload(createPayload);
+    const parsedPayload= createTodo.safeParse(createPayload);
     if(!parsedPayload.success){
         res.status(411).json({
             msg:"you sent a wrong inputs"
@@ -16,7 +18,7 @@ app.post("/todo", async function(req, res){
     }
     await todo.create({
         title: createPayload.title,
-        description:createPayload.title
+        description:createPayload.description
     })
     res.json({
         msg:"Todo Created"
@@ -32,7 +34,7 @@ app.get("/todos", async function(req, res){
 
 app.put("/completed", async function(req, res){
     const updatePayload= req.body;
-    const parsedPayload= updateTodo.safePayload(updatePayload);
+    const parsedPayload= updateTodo.safeParse(updatePayload);
     if(!parsedPayload.success){
         res.status(411)({
             msg:"you sent a wrong input"
@@ -42,10 +44,11 @@ app.put("/completed", async function(req, res){
     await todo.update({
         _id:req.body.id
     },{
-        completed:true;
+        completed:true
     })
     res.json({
         msg:"todo marked as completed"
     })
 })
 
+app.listen(4000);
