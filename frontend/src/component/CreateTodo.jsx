@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 export function CreateTodo(props) {
     //react quary
@@ -25,16 +26,16 @@ export function CreateTodo(props) {
                 padding: 10,
                 margin: 10
             }} onClick={() =>{
-                fetch("http://localhost:4000/todos"),{
+                fetch("http://localhost:4000/todo",{
                 method:"POST",
                 body: JSON.stringify({
                     title: title,
                     description: description
                 }),
-                header:{
-                    "contentType":"application/json"
+                headers:{
+                    "content-type":"application/json"
                 }
-                }
+                })
 
                 .then(async function (res) { 
                     const json= await res.json();
