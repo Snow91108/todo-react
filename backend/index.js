@@ -8,13 +8,14 @@ app.use(express.json());
 app.use(cors());
 
 app.post("/todo", async function(req, res){
+    try{
     const createPayload= req.body;
     const parsedPayload= createTodo.safeParse(createPayload);
     if(!parsedPayload.success){
         res.status(411).json({
             msg:"you sent a wrong inputs"
         })
-        return;
+      
     }
     await todo.create({
         title: createPayload.title,
@@ -22,17 +23,28 @@ app.post("/todo", async function(req, res){
     })
     res.json({
         msg:"Todo Created"
-    })
+    });
+}catch (err){
+    console.error("error in post todos",err);
+    res.status(500).json({msg:"internal server error"});
+    
+}
 })
 
 app.get("/todos", async function(req, res){
+    try{
     const todos= await todo.find({});
     res.json({
         todos
     })
+}catch(err){
+    console.error("error in get todos",err);
+    res.status(500).json({msg:"internal server error"});
+}
 })
 
 app.put("/completed", async function(req, res){
+    try{
     const updatePayload= req.body;
     const parsedPayload= updateTodo.safeParse(updatePayload);
     if(!parsedPayload.success){
@@ -49,6 +61,10 @@ app.put("/completed", async function(req, res){
     res.json({
         msg:"todo marked as completed"
     })
+}catch(err){
+    console.error("error in put", err);
+    res.status(500).json({msg:"internal server error"});
+}
 })
 
 app.listen(4000);
