@@ -2,6 +2,8 @@ const express =require ("express");
 const {createTodo}= require("./types");
 const {todo}= require("./db");
 const cors= require("cors")
+require("dotenv").config();
+
 const app= express();
 
 app.use(express.json());
@@ -67,4 +69,7 @@ app.put("/completed", async function(req, res){
 }
 })
 
-app.listen(4000);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(` Server running on http://localhost:${PORT}`);
+});

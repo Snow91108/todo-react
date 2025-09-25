@@ -1,0 +1,26 @@
+{
+  "name": "new-one",
+  "version": "1.0.0",
+  "description": "This project contains a simple todo application. It has the following features-",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm run start --prefix backend",
+    "client": "npm run start --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snow91108/todo-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Snow91108/todo-react/issues"
+  },
+  "homepage": "https://github.com/Snow91108/todo-react#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

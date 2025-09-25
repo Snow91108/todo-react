@@ -4,15 +4,17 @@
   "description": "This is a simple todo backend application ",
   "main": "index.js",
   "scripts": {
-    "start": "npm start",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "sachin",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "mongoose": "^8.18.1",
     "zod": "^4.1.9"
-  }
+  },
+  "keywords": []
 }
